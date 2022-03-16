@@ -19,7 +19,6 @@ public class Donjon {
         Configuration config = Configuration.getInstance();
         this.tabCases = new Case[config.getConfig(0)][config.getConfig(1)];
 
-        // TODO est-ce qu'on doit remplir le tableau manuellement?
         for (int i = 0; i < tabCases.length; i++){
             for (int j = 0; j < tabCases[i].length; j++){
                 this.tabCases[i][j] = new Case(new Position(i, j));
@@ -85,7 +84,6 @@ public class Donjon {
         Case voisin = null;
 
         boolean posValide = false;
-        // TODO Should every service of "Direction" be static or not ?
         do{
             try {
                 Position posAlea = Direction.directionAPosition(Direction.obtenirDirAlea());
@@ -104,7 +102,6 @@ public class Donjon {
         return voisin;
     }
 
-    // TODO est-ce que la fonction doit retourner une position ?
     public Case getVoisinLibreAlea(Position posCase){
         Case voisinLibre;
 
@@ -129,38 +126,41 @@ public class Donjon {
 
             // vérifie si cette case a un voisin non développé
             if (getNbVoisinsNonDeveloppe(nouvCase.getPos()) > 0){
-                // System.out.println("\tNb voisins: " + getNbVoisinsNonDeveloppe(nouvCase.getPos()));
-                Case caseVoisine = getVoisinLibreAlea(nouvCase.getPos());
+                Case caseVoisine = developpeCaseVoisine(nouvCase);
 
-                // obtient la position du voisin
-                Position posVoisin = caseVoisine.getPos();
-                // calcul la direction du voisin
-                posVoisin.soustrairePos(nouvCase.getPos());
+                // ajoute le voisin à la pile
+                pile.empiler(caseVoisine);
 
-                try{
-                    int dir = Direction.positionADirection(posVoisin);
-                    // ajoute à la case, comme voisin réciproque
-                    // appel à setVoisin pour les deux cases
-                    nouvCase.setVoisin(dir, caseVoisine);
-                    caseVoisine.setVoisin(Direction.directionOpposee(dir), nouvCase);
-
-                    // ajoute le voisin à la pile
-                    pile.empiler(caseVoisine);
-
-                    // définit la fin comme étant la dernière case développée
-                    caseFin = (Case)pile.regarder();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-
-
+                // définit la fin comme étant la dernière case développée
+                caseFin = (Case)pile.regarder();
             }
             else{
                 // il s'agit d'un cul-de-sac, dépile une case
                 pile.depiler();
             }
         }
+    }
+
+    private Case developpeCaseVoisine(Case nouvCase){
+        Case caseVoisine = getVoisinLibreAlea(nouvCase.getPos());
+
+        // obtient la position du voisin
+        Position posVoisin = caseVoisine.getPos();
+        // calcul la direction du voisin
+        posVoisin.soustrairePos(nouvCase.getPos());
+
+        try{
+            int dir = Direction.positionADirection(posVoisin);
+            // ajoute à la case, comme voisin réciproque
+            // appel à setVoisin pour les deux cases
+            nouvCase.setVoisin(dir, caseVoisine);
+            caseVoisine.setVoisin(Direction.directionOpposee(dir), nouvCase);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return caseVoisine;
     }
 
     private boolean positionEstValide(Position pos){

@@ -2,7 +2,7 @@ package personnage;
 /**
  * Classe abstraite d'un personnage d'un jeu
  * 
- * @author Fred Simard | ETS
+ * @author Fred Simard | ETS modifié par Fatma ALJANE, Guy BOUCHER, Jacinthe LAPOINTE
  * @version Hiver 2022 - TP2
  */
 

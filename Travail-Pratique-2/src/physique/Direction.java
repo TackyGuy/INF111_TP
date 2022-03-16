@@ -2,13 +2,32 @@ package physique;
 
 import java.util.Random;
 
+/**
+ * Classe qui contient les differentes directions possible
+ *
+ * La position en i est accessibles en lecture/écriture par l'entremise de 2 méthodes:
+ *  - getI
+ *  - setI
+ *
+ * La position en i est accessibles en lecture/écriture par l'entremise de 2 méthodes:
+ *  - getJ
+ *  - setJ
+ *
+ * @author Fatma ALJANE, Guy BOUCHER, Jacinthe LAPOINTE
+ * @version HIVER 2022
+ */
 public class Direction {
 
-    // TODO pourquoi est-ce que les attributs doivent etre public ?
     public static final int HAUT = 0, BAS = 1, GAUCHE = 2, DROITE = 3;
 
     private static Random RAND = new Random();
 
+    /**
+     * Méthode qui retourne la direction opposée
+     * @param dir la direction à transformer
+     * @throws Exception si la direction n'est pas valide
+     * @return int
+     */
     public static int directionOpposee(int dir) throws Exception{
         int nouvDir = 0;
         switch (dir){
@@ -31,6 +50,12 @@ public class Direction {
         return nouvDir;
     }
 
+    /**
+     * Méthode qui prend en paramètre une direction puis la transforme en position
+     * @param dir
+     * @throws Exception si la direction n'est pas valide
+     * @return Position
+     */
     public static Position directionAPosition(int dir) throws Exception{
         Position pos = null;
         switch (dir){
@@ -53,6 +78,11 @@ public class Direction {
         return pos;
     }
 
+    /**
+     * Méthode qui prend en paramètre une position puis la transforme en direction
+     * @param pos
+     * @return int
+     */
     public static int positionADirection(Position pos){
         int dir = -1;
 
@@ -64,6 +94,10 @@ public class Direction {
         return dir;
     }
 
+    /**
+     * Méthode qui donne une direction de facon aléatoire
+     * @return int
+     */
     public static int obtenirDirAlea(){
         int dirAlea;
         int indexAlea = RAND.nextInt(4);
