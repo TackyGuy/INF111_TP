@@ -7,6 +7,19 @@ import physique.Position;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Classe qui remplie un tableau de cases et produit le labyrinthe
+ *
+ * La case départ est accessibles en lecture par l'entremise de la methode:
+ * - getDepart
+ *
+ * La case départ est accessibles en lecture par l'entremise de la methode:
+ * - getFin
+ *
+ * @author Fatma ALJANE, Guy BOUCHER, Jacinthe LAPOINTE
+ * @version HIVER 2022
+ */
+
 public class Donjon {
     private Case caseDepart;
     private Case caseFin;
@@ -19,13 +32,14 @@ public class Donjon {
         Configuration config = Configuration.getInstance();
         this.tabCases = new Case[config.getConfig(0)][config.getConfig(1)];
 
-        // TODO est-ce qu'on doit remplir le tableau manuellement?
+        //remplie le tableau tabCases de cases
         for (int i = 0; i < tabCases.length; i++){
             for (int j = 0; j < tabCases[i].length; j++){
                 this.tabCases[i][j] = new Case(new Position(i, j));
             }
         }
 
+        //donne de façon aleatoire une case de départ
         this.caseDepart = tabCases[RANDOM.nextInt(tabCases.length)][RANDOM.nextInt(tabCases[0].length)];
 
         // produit le labyrinthe
@@ -34,6 +48,8 @@ public class Donjon {
         // assigne la fin
         this.caseFin.setFin(true);
     }
+
+    //Accesseurs et mutateurs
 
     public Case getDepart() {
         return caseDepart;
@@ -46,6 +62,10 @@ public class Donjon {
         return tabCases;
     }
 
+    /**
+     * Cette méthode donne une position aleatoire et retourne la position
+     * @return Position Référence vers une position choisie aleatoirement
+     */
     public Position getPositionAlea(){
         Position nouvPos = null;
 
@@ -53,6 +73,13 @@ public class Donjon {
         return  nouvPos;
     }
 
+    /**
+     * Cette méthode reçoit en paramètre la position de la case
+     * et retourne un int qui represente le nombre de voisins
+     *
+     * @param posCase Position de la case présentement évaluée
+     * @return int Référence vers un voisin choisi aléatoirement.
+     */
     public int getNbVoisinsNonDeveloppe(Position posCase){
         int nbVoisins = 0;
 
@@ -71,7 +98,6 @@ public class Donjon {
                 e.printStackTrace();
             }
         }
-
         return nbVoisins;
     }
 
@@ -85,7 +111,6 @@ public class Donjon {
         Case voisin = null;
 
         boolean posValide = false;
-        // TODO Should every service of "Direction" be static or not ?
         do{
             try {
                 Position posAlea = Direction.directionAPosition(Direction.obtenirDirAlea());
@@ -104,7 +129,13 @@ public class Donjon {
         return voisin;
     }
 
-    // TODO est-ce que la fonction doit retourner une position ?
+    /**
+     * Cette méthode reçoit en paramètre la position de la case
+     * et retourne une référence vers un voisin à cette case choisi aleatoirement
+     *
+     * @param posCase Position de la case
+     * @return Case Référence vers un voisin choisi aléatoirement.
+     */
     public Case getVoisinLibreAlea(Position posCase){
         Case voisinLibre;
 
@@ -116,6 +147,9 @@ public class Donjon {
         return voisinLibre;
     }
 
+    /**
+     * Methode qui développe le labyrinthe
+     */
     public void produireLabyrinthe() {
         PileSChainee pile = new PileSChainee();
         pile.empiler(caseDepart);

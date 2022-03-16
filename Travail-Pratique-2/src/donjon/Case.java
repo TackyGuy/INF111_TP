@@ -45,6 +45,8 @@ public class Case {
         this.position = pos;
     }
 
+    //Accesseurs et mutateurs
+
     public Position getPos(){
         return new Position(position);
     }
@@ -81,6 +83,11 @@ public class Case {
         caseVoisines[dir] = voisin;
     }
 
+    /**
+     * Méthode qui surcharge la méthode toString
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         return "Case{" +

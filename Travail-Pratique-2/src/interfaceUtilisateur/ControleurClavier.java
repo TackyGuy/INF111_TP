@@ -8,7 +8,7 @@ package interfaceUtilisateur;
  *	public void keyReleased(KeyEvent e) {}
  *  public void keyTyped(KeyEvent e) {}
  * 
- * @author Fred Simard | ETS
+ * @author Fred Simard modifié par Fatma ALJANE, Guy BOUCHER et Jacinthe LAPOINTE
  * @version Hiver 2022 - TP2
  */
 
@@ -47,23 +47,27 @@ public class ControleurClavier implements KeyListener{
 		if(joueurControlle != null){
 			
 			int keyCode = e.getKeyCode();
-			
+			System.out.println(KeyEvent.getKeyText(keyCode));
 			// gestion de l'action en fonction de l'événement clavier
 			switch(KeyEvent.getKeyText(keyCode)){
 
 				case "Haut":
+				case"↑":
 				case "Up":
 					joueurControlle.seDeplacer(Direction.HAUT);
 					break;
 				case "Bas":
+				case"↓":
 				case "Down":
 					joueurControlle.seDeplacer(Direction.BAS);
 					break;
 				case "Gauche":
+				case"←":
 				case "Left":
 					joueurControlle.seDeplacer(Direction.GAUCHE);
 					break;
 				case "Droite":
+				case"→":
 				case "Right":
 					joueurControlle.seDeplacer(Direction.DROITE);
 					break;

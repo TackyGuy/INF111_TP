@@ -11,7 +11,7 @@ package modele;
  * 
  * Le plan de jeu est implémenté en Lazy Singleton
  * 
- * @author Fred Simard | ETS
+ * @author Fred Simard  modifié par Fatma ALJANE, Guy BOUCHER et Jacinthe LAPOINTE
  * @version Hiver 2022 - TP2
  */
 
@@ -51,7 +51,7 @@ public class PlanDeJeu extends MonObservable implements MonObserver, Runnable {
 	}
 
 	/**
-	 *
+	 * Méthode qui créer des créatures et les positions dans le labyrinthe de manière aléatoire
 	 */
 	private void initCreatures(){
 		Case[][] cases = donjon.getCases();
@@ -59,23 +59,11 @@ public class PlanDeJeu extends MonObservable implements MonObserver, Runnable {
 
 		creatures.clear();
 
+		//créer des créature de façon aléatoire
 		for (int i = 0; i < config.getConfig(Configuration.NB_CREATURES); i++){
-
-			int indexCreature = rand.nextInt(3);
 			Position posAleatoire = donjon.getPositionAlea();
-			AbstractCreature typeCreature;
-			switch (indexCreature){
-				case 0:
-					typeCreature = new Minotaure(posAleatoire);
-					break;
-				case 1:
-					typeCreature = new Dragon(posAleatoire);
-					break;
-				default:
-					typeCreature = new Araignee(posAleatoire);
-					break;
-			}
-			// TODO attache le plan de jeu comme observer (les créatures sont observable)
+			AbstractCreature typeCreature=creatureAlea(posAleatoire);
+
 			typeCreature.attacherObserver(this);
 			typeCreature.setCase(cases[posAleatoire.getI()][posAleatoire.getJ()]);
 			creatures.add(typeCreature);
@@ -83,13 +71,39 @@ public class PlanDeJeu extends MonObservable implements MonObserver, Runnable {
 
 	}
 
+	/**
+	 * Méthode qui crée des créatures de façon aléatoire
+	 * @param posAleatoire Reference à une position aléatoire
+	 * @return typeCrature Reference à une créature
+	 */
+	public AbstractCreature creatureAlea(Position posAleatoire){
+
+		int indexCreature = rand.nextInt(3);
+		AbstractCreature typeCreature;
+
+		switch (indexCreature){
+			case 0:
+				typeCreature = new Minotaure(posAleatoire);
+				break;
+			case 1:
+				typeCreature = new Dragon(posAleatoire);
+				break;
+			default:
+				typeCreature = new Araignee(posAleatoire);
+				break;
+		}
+		return typeCreature;
+	}
+
+	/**
+	 * Méthode qui position le joueur sur la case de départ
+	 */
 	public void initJoueur(){
 		Case[][] cases = donjon.getCases();
 
-		Position posAleatoire = donjon.getDepart().getPos();
-		joueur = new Joueur(posAleatoire);
-		joueur.setCase(cases[posAleatoire.getI()][posAleatoire.getJ()]);
-		// TODO attache le plan de jeu comme observer (le joueur est observable)
+		Position posInitiale = donjon.getDepart().getPos();
+		joueur = new Joueur(posInitiale);
+		joueur.setCase(cases[posInitiale.getI()][posInitiale.getJ()]);
 		joueur.attacherObserver(this);
 	}
 
