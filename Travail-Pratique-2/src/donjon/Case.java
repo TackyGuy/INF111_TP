@@ -2,7 +2,33 @@ package donjon;
 import physique.*;
 
 /**
- * aallo
+ * Cases du donjon
+ *
+ * La position est accessible en lecture par l'entremise de la méthode:
+ *  - getPos()
+ *
+ * Les cases decouvertes sont accessibles en lecture/écriture par l'entremise de 2 méthodes:
+ * - getConfig
+ * - setDecouverte
+ *
+ * La case de fin de niveau es accessible en lecture/écriture par l'entremise de 2 méthodes:
+ * - getFin
+ * - setFin
+ *
+ * Les cases developpees sont accessible en lecture/écriture par l'entremise de 2 méthodes:
+ * - estDeveloppee
+ * - setDeveloppee
+ *
+ * Les cases découvertes sont accessible en lecture/écriture par l'entremise de 2 méthodes:
+ * - getConfig
+ * - setDecouverte
+ *
+ * Les cases voisines sont accessible en lecture/écriture par l'entremise de 2 méthodes:
+ * - getVoisin
+ * - setVoisin
+ *
+ * @author Fatma ALJANE, Guy BOUCHER, Jacinthe LAPOINTE
+ * @version HIVER 2022
  */
 
 public class Case {
