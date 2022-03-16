@@ -1,6 +1,10 @@
 package donjon;
 import physique.*;
 
+/**
+ * aallo
+ */
+
 public class Case {
 
     private Position position;
