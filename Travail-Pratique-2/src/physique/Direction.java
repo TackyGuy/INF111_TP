@@ -3,12 +3,19 @@ package physique;
 import java.util.Random;
 
 /**
- * Classe qui contient les differentes directions possible avec des méthodes associées
+ * Classe qui contient les differentes directions possible
+ *
+ * La position en i est accessibles en lecture/écriture par l'entremise de 2 méthodes:
+ *  - getI
+ *  - setI
+ *
+ * La position en i est accessibles en lecture/écriture par l'entremise de 2 méthodes:
+ *  - getJ
+ *  - setJ
  *
  * @author Fatma ALJANE, Guy BOUCHER, Jacinthe LAPOINTE
  * @version HIVER 2022
  */
-
 public class Direction {
 
     public static final int HAUT = 0, BAS = 1, GAUCHE = 2, DROITE = 3;
@@ -17,9 +24,9 @@ public class Direction {
 
     /**
      * Méthode qui prend en paramètre une direction et qui retourne la direction oppsoée associée
-     * @param dir Integer qui représente une direction
-     * @return nouvDir Integer qui représente une direction opposée à celle dans les paramètrs
-     * @throws Exception
+     * @param dir int qui représente une direction
+     * @return nouvDir int qui représente une direction opposée à celle dans les paramètrs
+     * @throws Exception si la direction n'est pas valide
      */
     public static int directionOpposee(int dir) throws Exception{
         int nouvDir = 0;
@@ -48,10 +55,10 @@ public class Direction {
      *
      * @param dir Integer qui définie une direction
      * @return pos Reference à une position
+     * @throws Exception si la direction n'est pas valide
      */
     public static Position directionAPosition(int dir) throws Exception{
         Position pos = null;
-
         switch (dir){
             case HAUT:
                 pos = new Position(-1, 0);
@@ -72,10 +79,10 @@ public class Direction {
     }
 
     /**
-     * Methode qui prend en paramètre une position et la transforme en direction
+     * Méthode qui prend en paramètre une position et la transforme en direction
      *
-     * @param pos Reference à une position
-     * @return dir Integer qui représente une direction
+     * @param pos Référence à une position
+     * @return dir int qui représente une direction
      */
     public static int positionADirection(Position pos){
         int dir = -1;
@@ -89,8 +96,8 @@ public class Direction {
     }
 
     /**
-     * Methode qui donne une direction de facon aleatoire
-     * @return indexAlea Integer aléatoire qui représente une direction
+     * Méthode qui donne une direction de facon aleatoire
+     * @return indexAlea int aléatoire qui représente une direction
      */
     public static int obtenirDirAlea(){
         int indexAlea = RAND.nextInt(4);
