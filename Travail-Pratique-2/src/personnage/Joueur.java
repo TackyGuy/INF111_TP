@@ -17,18 +17,24 @@ public class Joueur extends AbstractPersonnage {
     }
 
     /**
-     * méthode qui permet au joueur de se déplacer dans une direction et de découvrir les cases proches
-     * @param direction, direction du mouvement
+     * méthode qui permet au joueur de se déplacer dans une direction
+     * @param direction Integer qui représente une direction
      */
     @Override
     public void seDeplacer(int direction) {
         super.seDeplacer(direction);
 
+        decouvrirCase();
+    }
+
+    /**
+     * méthode découvre les cases voisines et courantes du joueurs
+     */
+    public void decouvrirCase(){
         caseCourante.setDecouverte(true);
         for (int i = 0; i < 4; i++){
             Case caseVoisine = caseCourante.getVoisin(i);
             if (caseVoisine != null) caseVoisine.setDecouverte(true);
         }
-
     }
 }

@@ -179,6 +179,11 @@ public class Donjon {
         }
     }
 
+    /**
+     * Méthode qui développe une case voisine de façon aléatoire
+     * @param nouvCase Référence à une case
+     * @return caseVoisine Reference de la case voisine
+     */
     private Case developpeCaseVoisine(Case nouvCase){
         Case caseVoisine = getVoisinLibreAlea(nouvCase.getPos());
 
@@ -201,6 +206,11 @@ public class Donjon {
         return caseVoisine;
     }
 
+    /**
+     * Méthode qui vérifie si la position est valide
+     * @param pos Référence à une position
+     * @return boolean
+     */
     private boolean positionEstValide(Position pos){
         if (pos.getI() < tabCases.length && pos.getI() >= 0 && pos.getJ() < tabCases[0].length && pos.getJ() >= 0) {
             return true;
